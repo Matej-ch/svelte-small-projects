@@ -9,12 +9,32 @@
   const decrement = () => {
     count -= 1.1
   }
+
+  $: doubled = count *2;
+
+  let textInput = '';
 </script>
+<h2>{title}</h2>
+<div>
+  {count.toFixed(2)} and doubled is {doubled.toFixed(2)}
+
+  {#if count > 5}
+    power of 2 of count is {Math.pow(count,2).toFixed(2)}
+  {/if}
+
+</div>
 
 <button on:click={increment}>
-  count with name {title} is {count.toFixed(2)}
+  +
 </button>
 
 <button on:click={decrement}>
-  count with name {title} is {count.toFixed(2)}
+  -
 </button>
+
+<div>
+  <form action="#">
+    <input type="text" placeholder="input text" bind:value={textInput}>
+    <div>{textInput}</div>
+  </form>
+</div>

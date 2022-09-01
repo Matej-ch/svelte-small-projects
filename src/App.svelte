@@ -1,6 +1,7 @@
 <script>
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
+  import Todo from "./lib/Todo.svelte";
 </script>
 
 <main>
@@ -16,6 +17,7 @@
 
   <div class="card">
     <Counter title="Epic title" />
+    <Todo/>
   </div>
 
   <p>
