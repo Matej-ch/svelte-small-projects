@@ -1,4 +1,6 @@
 <script>
+    import {fade, fly} from 'svelte/transition'
+
     let todos = [
         {id: 1, text: 'first todo', isCompleted: false, isEditing: false},
         {id: 2, text: 'second todo', isCompleted: true, isEditing: false}
@@ -80,8 +82,8 @@
 
     {#if todos.length}
         <ul>
-            {#each filteredTodos as todo}
-                <li class="py-2 flex gap-2 items-center">
+            {#each filteredTodos as todo (todo.id)}
+                <li class="py-2 flex gap-2 items-center" in:fade out:fade={{duration:600}}>
                     <input type="checkbox" bind:checked={todo.isCompleted}>
 
                     {#if todo.isEditing}
@@ -103,7 +105,10 @@
         <div class="py-2 flex justify-between">
             <button on:click={checkAll}>Check all</button>
 
-            <div>{remainingTodos.length} items remaining</div>
+            {#key remainingTodos}
+                <div><span class="inline-block" in:fly={{y:-20}}>{remainingTodos.length}</span> items remaining</div>
+            {/key}
+
         </div>
 
         <hr>

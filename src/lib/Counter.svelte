@@ -1,5 +1,7 @@
 <script>
-  export let title='Cool title';
+  import {fly} from "svelte/transition"
+
+  export let title = 'Cool title';
 
   let count = 0
   const increment = () => {
@@ -10,16 +12,26 @@
     count -= 1.1
   }
 
-  $: doubled = count *2;
+  $: doubled = count * 2;
 
   let textInput = '';
 </script>
 <h2>{title}</h2>
 <div>
-  {count.toFixed(2)} and doubled is {doubled.toFixed(2)}
+
+  {#key count}
+    <span class="inline-block" in:fly={{y:-20}}>{count.toFixed(2)} </span> and doubled is
+    <span class="inline-block" in:fly={{y:-20}}>{doubled.toFixed(2)}</span>
+  {/key}
+
 
   {#if count > 5}
-    power of 2 of count is {Math.pow(count,2).toFixed(2)}
+    power of 2 of count is
+
+    <span class="inline-block" in:fly={{y:-20}}>
+      {Math.pow(count, 2).toFixed(2)}
+    </span>
+
   {/if}
 
 </div>
